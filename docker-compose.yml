@@ -21,7 +21,7 @@ services:
         ports:
             - "3306:3306"
         volumes:
-            - ./mysql:/var/lib/mysql # папка с базами
+            - ./data/mysql:/var/lib/mysql # папка с базами
             # - ./config/mysqld.cnf:/etc/mysql/mysql.conf.d/mysqld.cnf
             # - ./config/my.cnf:/etc/my.cnf
         # задаем пароль для root пользователя

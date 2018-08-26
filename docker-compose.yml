@@ -1,0 +1,30 @@
+# Версия docker-compose
+version: '2'
+# Список сервисов (контейнеров)
+services:
+    web:
+      build: ./images/php
+      # image: php:7-apache
+      ports:
+        - "80:80"
+      volumes:
+        - ./www/:/var/www/html # директория с сайтами
+        - ./configs/apache2.conf:/usr/local/apache2/conf/httpd.conf # конфиг апача
+        - ./configs/php.ini:/usr/local/etc/php/php.ini  # конфиг php
+        - ./configs/vhosts:/etc/apache2/sites-enabled/ # хосты апача
+
+      links:
+        - mysql
+
+    mysql:
+        image: mysql:5.7
+        ports:
+            - "3306:3306"
+        volumes:
+            - ./mysql:/var/lib/mysql # папка с базами
+            # - ./config/mysqld.cnf:/etc/mysql/mysql.conf.d/mysqld.cnf
+            # - ./config/my.cnf:/etc/my.cnf
+        # задаем пароль для root пользователя
+        environment:
+            - MYSQL_ROOT_PASSWORD=root
+            - MYSQL_ROOT_HOST=% 

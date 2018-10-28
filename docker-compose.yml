@@ -20,6 +20,7 @@ services:
         image: mysql:5.7
         ports:
             - "3306:3306"
+        command: mysqld --sql_mode="" # отключаем строгий режим mysql 
         volumes:
             - ./data/mysql:/var/lib/mysql # папка с базами
             # - ./config/mysqld.cnf:/etc/mysql/mysql.conf.d/mysqld.cnf
